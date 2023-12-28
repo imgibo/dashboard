@@ -2,10 +2,10 @@ import mongoose from "mongoose";
 
 // ORM = Object Relational Mapper
 
-const MONGODB_URL = process.env.MONGODB_URI;
+const MONGODB_URI = process.env.MONGODB_URI;
 
 mongoose.set("strictQuery", false);
-mongoose.connect(MONGODB_URL);
+mongoose.connect(MONGODB_URI);
 
 const savingsSchema = mongoose.Schema({
     name: String,

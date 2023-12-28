@@ -1,16 +1,18 @@
 import express from "express";
 import cors from "cors";
-import connectToDB from "./utils/connectToDB";
+import savingsRouter from "./routes/savingsRouter.js";
+import connectToDB from "./utils/connectToDB.js";
 import dotenv from "dotenv";
 
 dotenv.config();
 
-const MONGODB_URL = process.env.MONGO_URI;
+const MONGODB_URI = process.env.MONGODB_URI;
 const app = express();
 
-connectToDB(MONGODB_URL);
+connectToDB(MONGODB_URI);
 
 app.use(cors());
 app.use(express.json());
+app.use("/savings", savingsRouter);
 
 export default app;

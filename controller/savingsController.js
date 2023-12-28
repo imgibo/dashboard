@@ -1,4 +1,4 @@
-import Savings from "../models/Savings";
+import Savings from "../models/Savings.js";
 
 async function getSaver(req, res) {
     const id = req.params.id;
@@ -20,7 +20,7 @@ async function saversCount(_, res) {
 }
 
 async function getSavingsTotal(_, res) {
-    let totalAmount = await savings.reduce((accumulator, current) => {
+    let totalAmount = await Savings.reduce((accumulator, current) => {
         return accumulator + current.amount;
     }, 0);
 
@@ -43,10 +43,10 @@ async function createSaver(req, res) {
 
     const saver = new Savings({
         name: body.String,
-        amount: body.Number || 0
+        amount: body.Number,
     });
 
-    const savedSaver = await saver.save().then(result => result);
+    const savedSaver = await saver.save().then((result) => result);
 
     return res.status(201).json(savedSaver);
 }
