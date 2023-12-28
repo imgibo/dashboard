@@ -36,16 +36,17 @@ async function deleteSaver(req, res) {
 
 async function createSaver(req, res) {
     const body = req.body;
+    console.log(body);
 
     if (!body.name) {
         return res.status(400).json({error: "content missing"})
     }
 
     const saver = new Savings({
-        name: body.String,
-        amount: body.Number,
+        name: body.name,
+        amount: body.amount
     });
-
+    console.log(saver);
     const savedSaver = await saver.save().then((result) => result);
 
     return res.status(201).json(savedSaver);
