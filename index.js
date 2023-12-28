@@ -7,7 +7,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-let savings = [
+let savers = [
     {
         id: 1,
         name: "Gilbert Burgos",
@@ -40,7 +40,7 @@ app.get("/savings/info", (req, res) => {
         return accumulator + current.amount;
     }, 0);
 
-    res.send(`<h1>Total amount: ${totalAmount}</h1>`);
+    res.send(`${totalAmount}`);
 });
 
 app.get("/", (req, res) => {
@@ -48,7 +48,7 @@ app.get("/", (req, res) => {
 });
 
 app.get("/savings", (req, res) => {
-    res.json(savings);
+    res.json(savers);
 });
 
 app.get("/savings/:id", (req, res) => {
