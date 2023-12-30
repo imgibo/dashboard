@@ -1,22 +1,8 @@
 import Savings from "../models/Savings.js";
 
-async function getSaver(req, res) {
-    const id = req.params.id;
-    const saver = await Savings.findById(id);
-
-    return res.json(saver);
-}
-
 async function getSavers(req, res) {
     const savers = await Savings.find({});
     return res.json(savers);
-}
-
-async function saversCount(_, res) {
-    const savers = await Savings.find({});
-    const count = await savers.length;
-
-    return res.send(`${count}`);
 }
 
 async function getSavingsTotal(_, res) {
@@ -25,6 +11,20 @@ async function getSavingsTotal(_, res) {
     }, 0);
 
     return res.send(`${totalAmount}`);
+}
+
+async function getSaver(req, res) {
+    const id = req.params.id;
+    const saver = await Savings.findById(id);
+
+    return res.json(saver);
+}
+
+async function saversCount(_, res) {
+    const savers = await Savings.find({});
+    const count = await savers.length;
+
+    return res.send(`${count}`);
 }
 
 async function deleteSaver(req, res) {
@@ -36,7 +36,6 @@ async function deleteSaver(req, res) {
 
 async function createSaver(req, res) {
     const body = req.body;
-    console.log(body);
 
     if (!body.name) {
         return res.status(400).json({error: "content missing"})
@@ -46,7 +45,7 @@ async function createSaver(req, res) {
         name: body.name,
         amount: body.amount
     });
-    console.log(saver);
+
     const savedSaver = await saver.save().then((result) => result);
 
     return res.status(201).json(savedSaver);
