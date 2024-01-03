@@ -6,11 +6,21 @@ async function getSavers(req, res) {
 }
 
 async function getSavingsTotal(_, res) {
-    let totalAmount = await Savings.reduce((accumulator, current) => {
-        return accumulator + current.amount;
-    }, 0);
+    // let totalAmount = await Savings.reduce((accumulator, current) => {
+    //     return accumulator + current.amount;
+    // }, 0);
+
+    // return res.send(`${totalAmount}`);
+
+    const savers = await Savings.find({});
+    let totalAmount = 0;
+
+    for (let i = 0; i < savers.length; i++) {
+        totalAmount += savers[i].amount;
+    }
 
     return res.send(`${totalAmount}`);
+
 }
 
 async function getSaver(req, res) {

@@ -3,8 +3,8 @@ import savingsController from '../controller/savingsController.js';
 
 const savingsRouter = express.Router();
 
-savingsRouter.get("/info", savingsController.getSavingsTotal);
 savingsRouter.get("/", savingsController.getSavers);
+savingsRouter.get("/info", savingsController.getSavingsTotal);
 savingsRouter.get("/:id", savingsController.getSaver);
 savingsRouter.post("/", savingsController.createSaver);
 savingsRouter.delete("/:id", savingsController.deleteSaver);
